@@ -1,0 +1,100 @@
+openapi: "3.0.3"
+info:
+  title: App Bootspring
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+paths:
+  /articulo/get/{id}:
+    get:
+      summary: Obtiene un artículo por Id
+      description: Regresa un solo artículo
+      operationId: getArticuloById
+      parameters:
+        - name: id
+          in: path
+          description: ID de artículo a devolver
+          required: true
+          schema:
+            type: string
+            maximum: 10
+          example: A003
+      responses:
+        "200":
+          description: Un objeto Articulo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Clave única del producto
+                  nombre:
+                    type: string
+                    description: Nombre con el que se identifica al producto
+                  descripcion:
+                    type: string
+                    description: Descripción general del producto
+                  precio:
+                    type: number
+                    description: Precio del producto
+                  modelo:
+                    type: string
+                    description: Modelo del producto
+
+  /articulo/update/{id}:
+    put:
+      summary: Actualizar un artículo existente
+      description: Actualizar un artículo existente por Id
+      operationId: updateArticulo
+      parameters:
+        - name: id
+          in: path
+          description: ID Articulo
+          required: true
+          schema:
+            type: string
+            maximum: 10
+          example: A003
+      requestBody:
+        description: Actualizar un artículo existente
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descripcion:
+                  type: string
+                  maximum: 200
+                  description: Descripción general del producto
+                modelo:
+                  type: string
+                  maximum: 10
+                  description: Modelo del producto
+            example:
+              descripcion: Descripción de artículo Id A003
+              modelo: 2028F
+      responses:
+        "200":
+          description: Un objeto Articulo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Clave única del producto
+                  nombre:
+                    type: string
+                    description: Nombre con el que se identifica al producto
+                  descripcion:
+                    type: string
+                    description: Descripción general del producto
+                  precio:
+                    type: number
+                    description: Precio del producto
+                  modelo:
+                    type: string
+                    description: Modelo del producto
