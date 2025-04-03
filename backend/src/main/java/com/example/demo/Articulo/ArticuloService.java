@@ -24,8 +24,10 @@ public class ArticuloService {
             updateArticulo.setDescripcion(request.getDescripcion());
             updateArticulo.setModelo(request.getModelo());
             articuloRepository.save(updateArticulo);
+
             return articuloRepository.findById(updateArticulo.getId());
         }
+
         return null;
     }
 

@@ -42,6 +42,8 @@ paths:
                   modelo:
                     type: string
                     description: Modelo del producto
+        "404":
+          description: Artículo no encontrado"
 
   /articulo/update/{id}:
     put:
@@ -98,3 +100,5 @@ paths:
                   modelo:
                     type: string
                     description: Modelo del producto
+        "404":
+          description: Artículo no encontrado"
