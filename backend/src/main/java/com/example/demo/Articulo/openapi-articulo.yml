@@ -44,6 +44,8 @@ paths:
                     description: Modelo del producto
         "404":
           description: Artículo no encontrado"
+        "405":
+          description: Método no permitido
 
   /articulo/update/{id}:
     put:
@@ -100,5 +102,9 @@ paths:
                   modelo:
                     type: string
                     description: Modelo del producto
+        "400":
+          description: Solicitud incorrecta
         "404":
-          description: Artículo no encontrado"
+          description: Artículo no encontrado
+        "405":
+          description: Método no permitido

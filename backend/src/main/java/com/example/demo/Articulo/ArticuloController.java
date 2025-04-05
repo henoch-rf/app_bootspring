@@ -26,7 +26,7 @@ public class ArticuloController {
         if (articulo == null) {
             return ResponseEntity.notFound().build();
         } else {
-            return new ResponseEntity<Articulo>(articulo, HttpStatus.FOUND);
+            return new ResponseEntity<Articulo>(articulo, HttpStatus.OK);
         }
 
     }
