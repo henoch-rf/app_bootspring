@@ -1,7 +1,5 @@
 package com.example.demo.Articulo;
 
-import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,24 +20,34 @@ public class ArticuloController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<Articulo> getArticulo(@PathVariable String id) {
-        Optional<Articulo> articulo = articuloService.getArticulo(id);
 
-        if (articulo.isPresent()) {
-            return new ResponseEntity<>(articulo.get(), HttpStatus.OK);
-        } else {
+        Articulo articulo = articuloService.getArticulo(id);
+
+        if (articulo == null) {
             return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<Articulo>(articulo, HttpStatus.FOUND);
         }
 
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Articulo> updateArticulo(@PathVariable String id, @RequestBody Articulo request) {
-        Optional<Articulo> updatedArticulo = articuloService.updateArticulo(id, request);
 
-        if (updatedArticulo != null) {
-            return new ResponseEntity<>(updatedArticulo.get(), HttpStatus.OK);
-        } else {
+        Articulo articulo = articuloService.getArticulo(id);
+
+        if (articulo == null) {
             return ResponseEntity.notFound().build();
+        } else {
+
+            Articulo articuloUpdated = articuloService.updateArticulo(articulo, request);
+
+            if (articuloUpdated == null) {
+                return ResponseEntity.badRequest().build();
+            } else {
+                return new ResponseEntity<Articulo>(articuloUpdated, HttpStatus.OK);
+            }
+
         }
 
     }

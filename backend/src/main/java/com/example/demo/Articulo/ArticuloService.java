@@ -1,7 +1,5 @@
 package com.example.demo.Articulo;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -12,23 +10,22 @@ public class ArticuloService {
 
     private final ArticuloRepository articuloRepository;
 
-    public Optional<Articulo> getArticulo(String id) {
-        return articuloRepository.findById(id);
+    public Articulo getArticulo(String id) {
+        return articuloRepository.findById(id).orElse(null);
     }
 
-    public Optional<Articulo> updateArticulo(String id, Articulo request) {
-        Optional<Articulo> articulo = articuloRepository.findById(id);
+    public Articulo updateArticulo(Articulo articulo, Articulo request) {
 
-        if (articulo.isPresent()) {
-            Articulo updateArticulo = articulo.get();
-            updateArticulo.setDescripcion(request.getDescripcion());
-            updateArticulo.setModelo(request.getModelo());
-            articuloRepository.save(updateArticulo);
+        articulo.setDescripcion(request.getDescripcion());
+        articulo.setModelo(request.getModelo());
 
-            return articuloRepository.findById(updateArticulo.getId());
+        try {
+            return articuloRepository.save(articulo);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return null;
         }
 
-        return null;
     }
 
 }
